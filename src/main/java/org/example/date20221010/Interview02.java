@@ -1,8 +1,5 @@
-package org.example;
+package org.example.date20221010;
 
-
-import java.util.Deque;
-import java.util.LinkedList;
 
 //파이썬 알고리즘 인터뷰 책 02번 문제 - 문자열 뒤집기(145p)
 public class Interview02 {
