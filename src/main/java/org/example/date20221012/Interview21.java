@@ -7,6 +7,17 @@ public class Interview21 {
     public static void main(String[] args){
         String input1 = "bcabc";
         String input2 = "cbacdcbc";
+        System.out.println(getSetString(input1));
+    }
+
+    public static String getSetString(String input){
+        String answer = "";
+        for(int i=0;i<input.length();i++){
+            
+        }
+
+
+        return answer;
     }
 
 

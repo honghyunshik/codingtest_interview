@@ -12,27 +12,40 @@ public class Interview08 {
 
         int[] input = {0,1,0,2,1,0,1,3,2,1,2,1};
 
-        System.out.println(getRainWithPointer(input));
+        //System.out.println(getRainWithPointer(input));
+        System.out.println(getRainWithStack(input));
     }
 
-    /*public static int getRainWithStack(int[] input){
+
+    public static int getRainWithStack(int[] input){
 
         int answer =0;
-        int leftMax = 0, rightMax = 0;
 
-        //배열을 deque으로 변환
-        Deque<Integer> deque = new LinkedList<>();
-        for(int num:input){
-            deque.add(num);
-        }
+        Stack<Integer> stack = new Stack<>();       //변곡점 만나기 전까지의 index를 stack에 저장
+        int top=0;
+        for(int i=0;i<input.length;i++){
 
-        while(deque.size()>0){
+            //변곡점을 만나는 경우
+            while(stack.size()!=0&&input[i]>input[stack.get(stack.size()-1)]){
+                top = stack.pop();
+
+                //stack에 쌓인 값이 없다 = 왼쪽에 벽이 없다
+                if(stack.size()==0){
+                    break;
+                }
+
+                int distance = i-stack.get(stack.size()-1)-1;
+                int waters = Math.min(input[i],input[stack.get(stack.size()-1)])-input[top];
+
+                answer += distance * waters;
+            }
+            stack.add(i);
 
         }
 
 
         return answer;
-    }*/
+    }
 
     public static int getRainWithPointer(int[] input){
 
