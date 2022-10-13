@@ -17,10 +17,9 @@ public class Interview23 {
         System.out.println(stack.deque);
         stack.pop();
         System.out.println(stack.deque);
-        //System.out.println(stack.deque);
-        /*stack.top();
+        stack.top();
         stack.pop();
-        stack.empty();*/
+        stack.empty();
 
     }
 }
@@ -35,7 +34,9 @@ class MyStack{
     //요소 x를 스택에 삽입한다
     public void push(int input){
         deque.add(input);
-        System.out.println(deque);
+        for(int i=0;i<deque.size()-1;i++){
+            deque.add(deque.pop());
+        }
     }
 
     //스택의 첫 번째 요소를 가져온다
