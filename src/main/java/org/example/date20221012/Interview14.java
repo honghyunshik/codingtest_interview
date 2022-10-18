@@ -1,7 +1,7 @@
 package org.example.date20221012;
 
 import java.util.Deque;
-import java.util.LinkedList;
+import java.util.Objects;
 
 //파이썬 알고리즘 인터뷰 책 14번 문제 - 두 정렬 리스트의 병합(213p)
 //정렬되어 있는 두 연결 리스트를 합쳐라
@@ -10,36 +10,61 @@ public class Interview14 {
     public static void main(String[] args){
 
         //deque 1->2->4 와 1->3->4 생성
-        int[] input1 = {1,2,4};
-        int[] input2 = {1,3,4};
-        Deque<Integer> deq1 = new LinkedList<>();
-        Deque<Integer> deq2 = new LinkedList<>();
-        for(int num:input1){
-            deq1.add(num);
+        LinkedList linkedList = new LinkedList();
+
+        //LinkedList l1 생성 : 1 -> 2 -> 4
+        Node l1 = new Node(1);
+        l1.next = new Node(2);
+        l1.next.next = new Node(4);
+
+        //LinkedList l2 생성 : 1 -> 3 -> 4
+        Node l2 = new Node(1);
+        l2.next = new Node(3);
+        l2.next.next = new Node(4);
+
+        Node answer = linkedList.mergeTowList(l1,l2);
+        while(answer!=null){
+            System.out.print(answer.data + " -> ");
+            answer = answer.next;
         }
-        for (int num:input2){
-            deq2.add(num);
+
+    }
+}
+
+class LinkedList{
+
+    public Node mergeTowList(Node l1, Node l2){
+
+        //l1이 null이거나   or    l1이 l2보다 클 때 l1과 l2를 스왑(왼쪽에 더 작은 수를 둔다)
+        if(l1==null||(l2!=null&&l1.data>l2.data)){
+            Node temp = l1;
+            l1 = l2;
+            l2 = temp;
         }
-        System.out.println(getSumDeque(deq1,deq2));
+
+        if(l1!=null) {
+            l1.next = mergeTowList(l1.next, l2);
+        }
+
+        return l1;
     }
 
-    public static Deque<Integer> getSumDeque(Deque<Integer> input1, Deque<Integer> input2){
-        Deque<Integer> answer = new LinkedList<>();
+}
 
-        while(input1.size()>0||input2.size()>0) {
-            if (input1.size() == 0) {
-                answer.add(input2.pop());
-            } else if (input2.size() == 0) {
-                answer.add(input1.pop());
-            } else {
-                if (input1.getFirst() > input2.getFirst()) {
-                    answer.add(input2.pop());
-                } else {
-                    answer.add(input1.pop());
-                }
-            }
-        }
+class Node{
 
-        return answer;
+    Integer data;    //데이터가 저장될 필드
+    Node next;      //다음 노드를 가리키는 필드
+
+    public Node(int data){
+        this.data = data;
+        this.next = null;
     }
+
+    public Node(){
+        this.next = null;
+        this.data = null;
+    }
+
+
 }
