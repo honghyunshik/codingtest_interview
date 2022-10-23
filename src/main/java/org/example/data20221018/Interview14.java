@@ -1,7 +1,4 @@
-package org.example.date20221012;
-
-import java.util.Deque;
-import java.util.Objects;
+package org.example.data20221018;
 
 //파이썬 알고리즘 인터뷰 책 14번 문제 - 두 정렬 리스트의 병합(213p)
 //정렬되어 있는 두 연결 리스트를 합쳐라
@@ -43,11 +40,29 @@ class LinkedList{
         }
 
         if(l1!=null) {
+            System.out.println("l1 : " + l1.data);
             l1.next = mergeTowList(l1.next, l2);
         }
 
+
         return l1;
     }
+
+    public Node mergeTwoList2(Node l1, Node l2){
+
+        if(l1==null||(l2!=null&&l1.data>l2.data)){
+            Node temp = l1;
+            l1 = l2;
+            l2 = temp;
+        }
+        if(l1!=null){
+            l1.next = mergeTowList(l1.next,l2);
+        }
+        return l1;
+
+    }
+
+
 
 }
 
