@@ -12,7 +12,7 @@ public class Interview19 {
         node.next.next.next = new Node(4);
         node.next.next.next.next = new Node(5);
         node.next.next.next.next.next = new Node(6);
-        Node answer = reverseLinkedList(node,2,5);
+        Node answer = reverseLinkedList(node,3,5);
         while(answer!=null){
             System.out.print(answer.data + " -> ");
             answer = answer.next;
@@ -20,27 +20,28 @@ public class Interview19 {
 
     }
 
-    public static Node reverseLinkedList(Node node, int start, int end){
+    public static Node reverseLinkedList(Node node, int a, int b){
 
         Node root = node;
-        Node temp = new Node();     //reverse된 LinkedList
-        Node prev = new Node();     //역순 이전 LinkedList
-        int count=0;
+        Node start = node;    //역순 하기 전 start node
 
-        while(node!=null){
-            if(count>=start&&count<=end){
-                Node now = node;
-                node = node.next;
-                node.next = prev;
+        for(int i=0;i<a-1;i++){
+            start = start.next;
+        }
+        Node end = start.next;      //역순 한 후 end node
+        Node prev = new Node();
+
+        for(int i=0;i<b-a+1;i++){
 
 
-            }
-            count++;
+
+
+
 
         }
 
 
-        return temp;
+        return root;
     }
 
 

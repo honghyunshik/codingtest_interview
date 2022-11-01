@@ -25,11 +25,11 @@ public class Interview18 {
         Node even = node.next;      //짝수 LinkedList
         Node even_head = node.next;
 
-        //홀수 다음 짝수 홀수 마지막 - 짝수 처음 연결
-        while(even!=null&&even.next!=null){
+        //홀수 끝 -> 짝수
+        while(odd!=null&&odd.next!=null){
             odd.next = odd.next.next;
-            even.next = even.next.next;
             odd = odd.next;
+            even.next = even.next.next;
             even = even.next;
         }
         odd.next = even_head;
