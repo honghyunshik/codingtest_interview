@@ -1,0 +1,31 @@
+package org.example.date20221215;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
+
+public class Baekjoon1697 {
+
+    static int target;
+
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine()," ");
+        int N = Integer.parseInt(st.nextToken());
+        target = Integer.parseInt(st.nextToken());
+
+
+
+    }
+
+    public static void bfs(){
+
+        Queue<Integer> queue = new LinkedList<>();
+
+
+    }
+}
