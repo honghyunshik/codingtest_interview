@@ -42,9 +42,7 @@ public class Baekjoon7657{
 
         System.out.println(bfs());
 
-        for(int[] arr:TOMATO){
-            System.out.println(Arrays.toString(arr));
-        }
+
 
     }
 
@@ -65,18 +63,19 @@ public class Baekjoon7657{
                 int nextR = curr.r + D[i][1];
                 if(nextL<0||nextL>M-1||nextR<0||nextR>N-1) continue;
                 if(VISITED[nextL][nextR]) continue;
-                if(TOMATO[nextL][nextR]==0) continue;
+                if(TOMATO[nextL][nextR]==-1) continue;
                 VISITED[nextL][nextR] = true;
                 TOMATO[nextL][nextR] = 1;
                 queue.add(new Pointer(nextL, nextR, curr.dis+1));
 
             }
+
             answer = curr.dis;
         }
 
         for(int i=0;i<M;i++){
             for(int j=0;j<N;j++){
-                if(TOMATO[i][j]==-1) return -1;
+                if(TOMATO[i][j]==-0) return -1;
             }
         }
 
