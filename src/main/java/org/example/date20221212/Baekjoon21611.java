@@ -44,11 +44,6 @@ public class Baekjoon21611{
             distance = Integer.parseInt(st.nextToken());
             magic();
             bomb();
-            for(int j=0;j<MARBLE.length;j++){
-                System.out.println(Arrays.toString(MARBLE[j]));
-            }
-            System.out.println();
-            System.out.println();
             change();
 
         }
@@ -68,8 +63,8 @@ public class Baekjoon21611{
             for(int i=0;i<2;i++){
                 int l = LOCATION[index+i][0];
                 int r = LOCATION[index+i][1];
-                if(i==0) clone[l][r] = arr[0];
-                else clone[l][r] = arr[1];
+                if(i==0) clone[l][r] = arr[1];
+                else clone[l][r] = arr[0];
             }
             index+=2;
         }
