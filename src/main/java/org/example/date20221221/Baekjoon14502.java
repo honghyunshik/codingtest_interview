@@ -76,7 +76,6 @@ public class Baekjoon14502 {
 
         int c = 0;
         for(int[] arr:BLANK_LIST){
-        if(c++==1) break;
 
             for(int index:arr){
                 int l = BLANK_LOCATION.get(index)[0];
@@ -84,29 +83,18 @@ public class Baekjoon14502 {
                 LABORATORY[l][r] = 1;
             }
 
-            for(int i=0;i<LABORATORY.length;i++){
-                System.out.println(Arrays.toString(LABORATORY[i]));
-            }
-            System.out.println();
-            System.out.println();
 
 
-            //System.out.println(fixed_virus_count);
+            VISITED = new boolean[N][M];
             for(int i=0;i<N;i++){
                 for(int j=0;j<M;j++){
                     if(LABORATORY[i][j]==2){
-                        VISITED = new boolean[N][M];
+
                         dfs(i,j);
                     }
                 }
             }
-            for(int i=0;i<LABORATORY.length;i++){
-                System.out.println(Arrays.toString(LABORATORY[i]));
-            }
-            System.out.println();
-            System.out.println();
 
-            System.out.println(VIRUS_COUNT);
             int temp_answer = N*M- VIRUS_COUNT - WALL_COUNT;
             answer = Math.max(answer,temp_answer);
             VIRUS_COUNT = fixed_virus_count;
