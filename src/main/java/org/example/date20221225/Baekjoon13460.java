@@ -3,6 +3,7 @@ package org.example.date20221225;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
@@ -16,6 +17,7 @@ public class Baekjoon13460 {
     static boolean[][] VISITED_RED;
     static boolean[][] VISITED_BLUE;
     static boolean redIn, blueIn;
+    static ArrayList<int[]> VISITED;
 
     public static void main(String[] args) throws IOException {
 
@@ -24,8 +26,7 @@ public class Baekjoon13460 {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         BOARD = new String[N][M];
-        VISITED_RED = new boolean[N][M];
-        VISITED_BLUE = new boolean[N][M];
+        VISITED = new ArrayList<>();
         int startBlueL = 0, startBlueR = 0, startRedL = 0, startRedR = 0 , targetL = 0, targetR = 0;
         for(int i=0;i<N;i++){
             String[] input= br.readLine().split("");
@@ -66,9 +67,8 @@ public class Baekjoon13460 {
         }
 
         Queue<Pointer> queue= new LinkedList<>();
-        VISITED_RED[startRedL][startRedR] = true;
-        VISITED_BLUE[startBlueL][startBlueR] = true;
         queue.add(new Pointer(startRedL, startRedR, startBlueL, startBlueR, 1));
+        VISITED.add(new int[]{startRedL,startRedR,startBlueL,startBlueR});
         while(!queue.isEmpty()){
 
             Pointer curr = queue.poll();
@@ -121,10 +121,15 @@ public class Baekjoon13460 {
                 if(redIn) {
                     return curr.dis;
                 }
-                if(VISITED_RED[nextRedL][nextRedR]&&VISITED_BLUE[nextBlueL][nextBlueR]) continue;
-                VISITED_RED[nextRedL][nextRedR] = true;
-                VISITED_BLUE[nextBlueL][nextBlueR] = true;
-                System.out.println(nextRedL + "," + nextRedR + "   " + nextBlueL + "," + nextBlueR + " dis : " + curr.dis);
+
+                boolean isVisited = false;
+                for(int[] arr:VISITED){
+                    if(arr[0]==nextRedL&&arr[1]==nextRedR&&arr[2]==nextBlueL&&arr[3]==nextBlueR){
+                        isVisited = true;
+                    }
+                }
+                if(isVisited) continue;
+                VISITED.add(new int[]{nextRedL,nextRedR,nextBlueL,nextBlueR});
                 queue.add(new Pointer(nextRedL,nextRedR,nextBlueL,nextBlueR,curr.dis+1));
             }
         }
