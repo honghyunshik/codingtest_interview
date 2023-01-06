@@ -35,11 +35,30 @@ public class Baekjoon17420 {
     public static long minNum(Gift[] giftList){
 
         int count = 0;
+        int prevDay = 0;        //이전의 prevDay를 저장
+        int sameMaxDay = 0;     //willDay가 같은 날짜 중에서 최고의 prevDay를 저장
+        int prevWillDay = 0;        //이전의 willDay값 저장
         //1. 이전 선물의 남아있는 일수보다 많이 남아있어야 함
 
         for(Gift gift:giftList){
 
+            int lastDay = gift.lastDay;
+            int willDay = gift.willDay;
+
+            if(willDay!=prevWillDay&&prevWillDay!=0) {
+                prevDay = sameMaxDay;
+            }
+
+            if(prevDay>lastDay||willDay>lastDay){
+                int max = Math.max(prevDay,willDay);
+                int tempCount = (int) Math.ceil(((double)max-lastDay)/30);
+                count += tempCount;
+                lastDay = 30*tempCount+lastDay;
+            }
+            sameMaxDay = Math.max(lastDay,sameMaxDay);
+            prevWillDay = willDay;
         }
+
 
 
 
@@ -57,6 +76,9 @@ class Gift implements Comparable<Gift>{
     }
     @Override
     public int compareTo(Gift o) {
+        if(o.willDay==this.willDay){
+            return this.lastDay-o.lastDay;
+        }
         return this.willDay-o.willDay;
     }
 }
