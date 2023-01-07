@@ -32,10 +32,7 @@ public class Baekjoon3109 {
         }
         for(int i=0;i<R;i++){
             if(!visited[i][0]){
-                getPipe(0,i);
-                System.out.println();
-                System.out.println();
-                System.out.println();
+                getPipe(i,0);
             }
         }
 
@@ -61,7 +58,7 @@ public class Baekjoon3109 {
             Node curr = queue.poll();
             int l = curr.l;
             int r = curr.r;
-            System.out.println(l + "," + r);
+            int k = 11;
             if(r==C-1) pipe++;
 
             for(int i=0;i<D.length;i++){
