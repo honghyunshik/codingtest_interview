@@ -58,7 +58,6 @@ public class Baekjoon3109 {
             Node curr = queue.poll();
             int l = curr.l;
             int r = curr.r;
-            int k = 11;
             if(r==C-1) pipe++;
 
             for(int i=0;i<D.length;i++){
