@@ -41,38 +41,26 @@ public class Baekjoon3109 {
 
     }
 
-    public static void getPipe(int startL, int startR){
-        class Node{
-            int l, r;
-            Node(int l, int r){
-                this.l = l;
-                this.r = r;
-            }
+    public static boolean getPipe(int startL, int startR){
 
+
+        if(startR==C-1){
+            pipe++;
+            return true;
         }
 
-        Queue<Node> queue = new LinkedList<>();
-        queue.add(new Node(startL, startR));
-
-        while(!queue.isEmpty()){
-            Node curr = queue.poll();
-            int l = curr.l;
-            int r = curr.r;
-            if(r==C-1) pipe++;
-
-            for(int i=0;i<D.length;i++){
-                int nextL = l + D[i][0];
-                int nextR = r + D[i][1];
-                if(nextL<0||nextL>R-1||nextR<0||nextR>C-1) continue;
-                if(bread[nextL][nextR].equals("x")) continue;
-                if(visited[nextL][nextR]) continue;
-                visited[nextL][nextR] = true;
-                queue.add(new Node(nextL,nextR));
-                break;
-            }
-
+        for(int i=0;i<D.length;i++){
+            int nextL = startL + D[i][0];
+            int nextR = startR + D[i][1];
+            if(nextL<0||nextL>R-1||nextR<0||nextR>C-1) continue;
+            if(bread[nextL][nextR].equals("x")) continue;
+            if(visited[nextL][nextR]) continue;
+            visited[startL][startR] = true;
+            if(getPipe(nextL,nextR)) return true;
         }
 
+
+        return false;
     }
 
 }
