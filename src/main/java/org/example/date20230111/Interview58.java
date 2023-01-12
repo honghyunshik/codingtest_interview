@@ -27,6 +27,12 @@ public class Interview58 {
             int num = Integer.parseInt(st.nextToken());
             node = insertNode(node,num);
         }
+        Node58 answer = merge_sort(node);
+
+        while(answer!=null){
+            System.out.println(answer.val);
+            answer = answer.next;
+        }
 
     }
 
@@ -35,25 +41,50 @@ public class Interview58 {
         if(node==null) return new Node58(val);
         node.next = insertNode(node.next, val);
         return node;
+
     }
 
-    public static void merge_sort(Node58 node){
-        merge_sort(node,0,N-1);
-    }
 
-    public static void merge_sort(Node58 node, int l, int r){
+    public static Node58 merge_sort(Node58 node){
 
-        if(l==r) return;
-        int mid = (l+r)/2;
-        merge_sort(node,l,mid);
-        for(int i=0;i<mid;i++){
-            node = node.next;
+        if(node==null||node.next==null) return node;
+
+        Node58 prev = null, slow = node, fast = node;
+        while(fast!=null&&fast.next!=null){
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        merge_sort(node,mid+1,r);
-        merge(node,l,mid,r);
-    }
-    public static void merge(Node58 node, int l, int mid, int r){
+        prev.next = null;
 
+        Node58 node1 = merge_sort(node);
+        Node58 node2 = merge_sort(slow);
+
+        return merge(node1,node2);
+
+
+    }
+    public static Node58 merge(Node58 l1, Node58 l2){
+
+        Node58 head = new Node58(0), p = head;
+
+        while(l1!=null&&l2!=null){
+            if(l1.val<l2.val){
+                p.next = l1;
+                l1 = l1.next;
+            }else{
+                p.next = l2;
+                l2 = l2.next;
+            }
+            p = p.next;
+        }
+        if(l1!=null){
+            p.next = l1;
+        }
+        if(l2!=null){
+            p.next = l2;
+        }
+        return head.next;
     }
 
 
