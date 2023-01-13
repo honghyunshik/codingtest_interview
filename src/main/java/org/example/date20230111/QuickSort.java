@@ -25,11 +25,38 @@ public class QuickSort {
 
         if(lo>=hi) return;
 
+        int pivot = partition(arr,lo,hi);
+
+        pivotSort(arr,lo,pivot-1);
+        pivotSort(arr,pivot+1,hi);
+
     }
 
     public static int partition(int[] arr, int left, int right){
 
-        return 1;
+        int lo = left;
+        int hi = right;
+        int pivot = arr[left];
+
+        while(lo<hi){
+            while(arr[hi]>pivot&&lo<hi){
+                hi--;
+            }
+            while(arr[lo]<=pivot&&lo<hi){
+                lo++;
+            }
+            swap(arr,lo,hi);
+        }
+
+        swap(arr,left, lo);
+        return lo;
+    }
+
+    public static void swap(int[] a, int i, int j){
+
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
     }
 
 
