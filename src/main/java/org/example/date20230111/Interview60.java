@@ -22,7 +22,7 @@ public class Interview60 {
         for(String str:input){
             head = insertNode(head,Integer.parseInt(str));
         }
-        head = insertInjection(head);
+        head = insertionSortList(head);
         while(head!=null){
             System.out.println(head.val);
             head = head.next;
@@ -37,10 +37,38 @@ public class Interview60 {
         return node;
     }
 
+    public static LinkedNode insertionSortList(LinkedNode head) {
+
+        if( head == null ){
+            return head;
+        }
+
+        LinkedNode helper = new LinkedNode(-1);
+        LinkedNode cur = head;
+        LinkedNode pre = helper;
+        LinkedNode next = null;
+
+        while( cur != null ){
+            next = cur.next;
+
+            while( pre.next != null && pre.next.val < cur.val ){
+                pre = pre.next;
+            }
+
+            cur.next = pre.next;
+            pre.next = cur;
+            pre = helper;
+            cur = next;
+        }
+        return helper.next;
+    }
+
     public static LinkedNode insertInjection(LinkedNode head){
 
         LinkedNode node = head;
         LinkedNode headPointer = new LinkedNode(0);
+        headPointer.next = head;
+
         while(node!=null){
 
             LinkedNode p = node;
@@ -48,11 +76,6 @@ public class Interview60 {
             while(p.next!=null&&p.next.val>=node.val){
                 p = p.next;
             }
-
-
-
-
-
 
 
 
