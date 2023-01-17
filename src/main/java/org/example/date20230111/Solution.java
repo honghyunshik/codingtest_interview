@@ -10,9 +10,13 @@ class Solution {
 
     public static void main(String[] args){
 
-        long[] numbers = new long[500];
-        for(int i=0;i<500;i++){
+        long[] numbers = new long[1000];
+        /*for(int i=0;i<100;i++){
             numbers[i] = i+1;
+        }*/
+        int idx = 0;
+        for(long i=1;i<=1000;i++){
+            numbers[idx++]=i;
         }
         Solution sol = new Solution();
         int[] answer = sol.solution(numbers);
