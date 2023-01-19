@@ -6,9 +6,9 @@ public class Solution {
 
         Solution sol = new Solution();
         System.out.println(sol.solution(3,4,2,3,3,1,5));
-        System.out.println(sol.solution(2,2,1,1,2,2,2));
-        System.out.println(sol.solution(3,3,1,2,3,3,4));
-        System.out.println(sol.solution(2,1,0,0,1,0,5));
+        //System.out.println(sol.solution(2,2,1,1,2,2,2));
+        //System.out.println(sol.solution(3,3,1,2,3,3,4));
+        //System.out.println(sol.solution(2,1,0,0,1,0,5));
     }
 
 
@@ -32,9 +32,10 @@ public class Solution {
             for(int i=0;i<r-x;i++){
                 answer += "d";
             }
+            x=r;
         }
 
-        if(x!=n-1||m==1){
+        if(x!=n||m==1){
             int downCount = 0;
             while(answer.length()<spare){
                 if(x==n-1||downCount==spare/2){
@@ -55,6 +56,7 @@ public class Solution {
             for(int i=0;i<y-c;i++){
                 answer += "l";
             }
+            y=c;
         }
         if(spare!=0){
 
@@ -68,6 +70,7 @@ public class Solution {
             for(int i=0;i<c-y;i++){
                 answer += "r";
             }
+            y=c;
         }
 
         //마지막은 위로 이동하는것
@@ -75,6 +78,7 @@ public class Solution {
             for(int i=0;i<x-r;i++){
                 answer += "u";
             }
+            x=r;
         }
 
 
