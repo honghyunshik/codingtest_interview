@@ -5,10 +5,13 @@ public class Solution {
     public static void main(String[] args){
 
         Solution sol = new Solution();
-        System.out.println(sol.solution(3,4,2,3,3,1,5));
+        //System.out.println(sol.solution(3,4,2,3,3,1,5));
         //System.out.println(sol.solution(2,2,1,1,2,2,2));
         //System.out.println(sol.solution(3,3,1,2,3,3,4));
         //System.out.println(sol.solution(2,1,0,0,1,0,5));
+        //System.out.println(sol.solution(3,1,0,0,3,1,6));
+        System.out.println(sol.solution(1,3,1,3,1,1,2));
+
     }
 
 
@@ -27,28 +30,18 @@ public class Solution {
         //얼마나 많이 d를 이동할 수 있냐?
         int spare = k-minNum;       //여유분
 
+
         //아래로 이동하는게 베스트
+        int count = 0;
         if(x<r){
             for(int i=0;i<r-x;i++){
                 answer += "d";
+                count++;
             }
             x=r;
         }
 
-        if(x!=n||m==1){
-            int downCount = 0;
-            while(answer.length()<spare){
-                if(x==n-1||downCount==spare/2){
-                    answer += "u";
-                    x--;
-                }else{
-                    answer += "d";
-                    downCount++;
-                    x++;
-                }
-            }
-            spare = 0;
-        }
+
 
 
         //그다음은 왼쪽으로 이동한느것
@@ -58,11 +51,13 @@ public class Solution {
             }
             y=c;
         }
-        if(spare!=0){
+
+        if(spare!=0&&y<m){
 
             for(int i=0;i<spare/2;i++){
                 answer += "rl";
             }
+            spare = 0;
         }
 
         //그다음은 오른쪽으로 이동하는것
@@ -71,6 +66,11 @@ public class Solution {
                 answer += "r";
             }
             y=c;
+        }
+        if(spare!=0){
+            for(int i=0;i<spare/2;i++){
+                answer += "ud";
+            }
         }
 
         //마지막은 위로 이동하는것
