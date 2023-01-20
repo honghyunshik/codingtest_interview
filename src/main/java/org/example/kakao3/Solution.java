@@ -10,7 +10,7 @@ public class Solution {
         //System.out.println(sol.solution(3,3,1,2,3,3,4));
         //System.out.println(sol.solution(2,1,0,0,1,0,5));
         //System.out.println(sol.solution(3,1,0,0,3,1,6));
-        System.out.println(sol.solution(3,3,2,2,2,3,5));
+        System.out.println(sol.solution(3,3,1,3,1,3,6));
 
     }
 
@@ -28,107 +28,92 @@ public class Solution {
 
         //최대한 d, l, r , u순서대로 이동해야 한다
         //얼마나 많이 d를 이동할 수 있냐?
-        int spare = k-minNum;       //여유분
+        int spare = k-minNum;       //여유분 -> 이만큼은 목표치 외에 이동할 수 있다
 
-        //출발지점과 도착지점이 같을 때
-        if(x==r&&y==c){
-            //아래로 이동할 수 있으면 아래로
+        //목표로 가는길에 d가 있다면 우선 이동
+
+
+        int downCount = 0;
+        int leftCount = 0;
+        boolean isDownFirst = true, isLeftFirst = true, isRightFirst = true, isUpFirst = true;
+        //여유분만큼 d -> l -> r -> u 순서대로 이동
+        if(spare>0){
+            //아래로 이동하는것이 가능한가? -> 끝이 아니거나 or 돌아올 수 있을만큼 아래로 이동
             if(x<n){
-                for(int i=0;i<spare/2;i++){
-                    answer += "du";
+                //우선 도착지까지 이동
+                for(int i=0;i<r-x;i++) {
+                    answer += "d";
                 }
-                return answer;
+                if(r>x){
+                    x = r;        //x는 목표치 r로 이동했다
+                }
+                //그다음에 최대한 내려갈 수 있을만큼 아래로 이동
+                for(;x<n&&downCount<spare/2;downCount++){
+                    answer+="d";
+                    x++;
+                }
+
+                spare -= downCount*2;
 
             }
-            //왼쪽으로 갈 수 있으면 왼쪽으로
+            //왼쪽으로 이동하는 것이 가능한가?
             if(y>1){
-                for(int i=0;i<spare/2;i++){
-                    answer += "lr";
+                //우선 도착지까지 이동
+                for(int i=0;i<y-c;i++) {
+                    answer += "l";
                 }
-                return answer;
+                if(y>c){
+                    y = c;        //y는 목표치 c로 이동했다
+                }
+
+                //최대한 왼쪽으로 이동
+                for(;y>1&&leftCount<spare/2;leftCount++){
+                    answer+="l";
+                    y--;
+                }
+                spare -= leftCount*2;
 
             }
-            //왼쪽으로 못가면 오른쪽으로
-            if(y<m){
+            //현재까지 spare가 남아있다면 왕복으로 지워주야아 한다 -> rl이 먼저, 그다음에 ud
+            if(spare>0&&y<m){
                 for(int i=0;i<spare/2;i++){
                     answer += "rl";
                 }
-                return answer;
-
+                spare = 0;
             }
 
-            //다 아니면 위로
-            for(int i=0;i<spare/2;i++){
-                answer += "ud";
-            }
-
-            return answer;
-        }
-
-        //아래로 이동하는게 베스트
-        if(x<r){
-            for(int i=0;i<r-x;i++){
-                answer += "d";
-            }
-            x=r;
-        }
-
-        //dd 다음은 du
-        if(spare>0&&x<n){
-            for(int i=0;i<spare/2;i++){
-                answer += "du";
-            }
-            spare = 0;
-        }
-
-
-        //그다음은 왼쪽으로 이동한느것
-        if(y>c){
-            for(int i=0;i<y-c;i++){
-                answer += "l";
-            }
-            y=c;
-        }
-
-        //ll다음은 lr
-        if(spare>0&&y>1){
-            for(int i=0;i<spare/2;i++){
-                answer += "lr";
-            }
-            spare = 0;
-        }
-
-        //rr 보다 rl이 더 빠르므로 왕복운동 먼저
-        if(spare!=0&&y<m){
-
-            for(int i=0;i<spare/2;i++){
-                answer += "rl";
-            }
-            spare = 0;
-        }
-
-        //그다음은 오른쪽으로 이동하는것
-        if(y<c){
             for(int i=0;i<c-y;i++){
                 answer += "r";
-            }
-            y=c;
-        }
 
-        //ud가 uu보다 빠르므로 ud 먼저
-        if(spare!=0){
-            for(int i=0;i<spare/2;i++){
-                answer += "ud";
             }
-        }
 
-        //마지막은 위로 이동하는것
-        if(x>r){
+            if(spare>0){
+                for(int i=0;i<spare/2;i++){
+                    answer += "ud";
+                }
+            }
+
             for(int i=0;i<x-r;i++){
                 answer += "u";
             }
-            x=r;
+        }else{
+            for(int i=0;i<r-x;i++){
+                answer += "d";
+            }
+            for(int i=0;i<y-c;i++){
+                answer += "l";
+            }
+            for(int i=0;i<c-y;i++){
+                answer += "r";
+            }
+            for(int i=0;i<x-r;i++){
+                answer += "u";
+            }
         }
+
+
+
+
 
 
 
