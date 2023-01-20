@@ -19,7 +19,7 @@ public class Programmers1 {
 
     static Node node;
     static int num = 0;
-    static boolean ans = true;
+    static int ans = 1;
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -33,7 +33,7 @@ public class Programmers1 {
 
     }
 
-
+    //숫자를 이진수로 변환한다(앞에 자리수에 맞춰 0을 붙여준다)
     public static String getBinaryNum(int num){
 
         String binaryNumber = Integer.toBinaryString(num);
@@ -52,9 +52,8 @@ public class Programmers1 {
             str += "0";
         }
 
-
         str+=binaryNumber;
-        postOrderSearch(node,str);
+        postOrderSearch(node,str);      //중위 순회하면서 노드 생성
         return str;
     }
 
@@ -83,16 +82,20 @@ public class Programmers1 {
         }
 
     }
-
     public static void preOrder(Node node){
 
         if(node==null) return;
-        preOrder(node.left);
-        preOrder(node.right);
-        if((node.left!=null&&node.val==0)&&(node.left.val==1&&node.right.val==1)){
-            ans = false;
+        if(node.left!=null&&node.val==0&&node.left.val==1){
+            ans = 0;
             return;
         }
+        if(node.right!=null&&node.val==0&&node.right.val==1){
+            ans = 0;
+            return;
+        }
+        preOrder(node.left);
+        preOrder(node.right);
+
     }
 }
 
