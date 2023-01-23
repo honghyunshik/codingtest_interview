@@ -37,9 +37,9 @@ public class Solution {
         }
 
         String[] summits_str = br.readLine().split(" ");
-        int[] summits = new int[gates_str.length];        //산봉우리 정보(오른차순 정렬)
-        for(int i=0;i<gates_str.length;i++){
-            gates[i] = Integer.parseInt(gates_str[i]);
+        int[] summits = new int[summits_str.length];        //산봉우리 정보(오른차순 정렬)
+        for(int i=0;i<summits_str.length;i++){
+            summits[i] = Integer.parseInt(summits_str[i]);
         }
         Arrays.sort(summits);       //산봉우리 오름차순 정렬
 
@@ -58,53 +58,55 @@ public class Solution {
         //산봉우리들의 번호가 담긴 정수배열 summits
 
         int intensity = Integer.MAX_VALUE;      //휴식 없이 이동한 시간
-
-        int[] intensities = new int[n+1];
-        Arrays.fill(intensities,Integer.MAX_VALUE);
         int[] answer = new int[2];
 
         for(int gate:gates){
+
             PriorityQueue<Node> pq = new PriorityQueue<>();
             pq.add(new Node(gate,0));
+            int[] intensities = new int[n+1];
+            Arrays.fill(intensities,Integer.MAX_VALUE);
+            intensities[gate] = 0;
             boolean[] visited = new boolean[n+1];
-
+            for(int t:gates){
+                if(t==gate) continue;
+                visited[t] = true;
+            }
             while(!pq.isEmpty()){
 
                 int now = pq.poll().index;
-
-                if(visited[now]) continue;
+                if(visited[now]) continue;;
                 visited[now] = true;
 
-                for(int i=1;i<paths[now].length;i++){
-
-                    int next = paths[now][i];
-                    int next_index = i;
-
-                    if(next==0) continue;       //정점이 연결되어 있지 않다면 continue
-
-                    boolean isGate = false;
-                    for(int t:gates){
-                        if (next_index==t){
-                            isGate = true;
-                            break;
+                //summit에 도착했을 때 최솟값을 저장
+                for(int summit:summits){
+                    if(now==summit){
+                        System.out.println(Arrays.toString(intensities) + now);
+                        int temp = Integer.MIN_VALUE;
+                        for(int i=1;i<intensities.length;i++){
+                            if(intensities[i]==Integer.MAX_VALUE) continue;
+                            if(visited[i]) continue;
+                            temp = Math.max(intensities[i],temp);
+                        }
+                        if(temp<intensity){
+                            intensity = temp;
+                            answer[0] = now;
+                            answer[1] = intensity;
                         }
                     }
-                    if(isGate) continue;
-                    if(intensities[next]>next){
-                        intensities[next] = next;
-                        pq.add(new Node(next,intensities[next]));
-                    }
                 }
-                for(int next:paths[now]){
 
+                //now랑 연결된 점들과 비교
+                for(int i=1;i<paths[now].length;i++){
 
+                    if(paths[now][i]==0) continue;      //연결되지 않은 점은 pass
+                    if(intensities[i]>Math.max(paths[now][i],intensities[now])){
+                        intensities[i] = Math.max(paths[now][i],intensities[now]);
+                        pq.add(new Node(i,intensities[i]));
+                    }
                 }
             }
         }
-
-
-
-
 
 
         return answer;
@@ -112,7 +114,7 @@ public class Solution {
 
 }
 
-class Node implements Comparator<Node>{
+class Node implements Comparable<Node>{
 
     int index, cost;
 
@@ -120,8 +122,8 @@ class Node implements Comparator<Node>{
         this.index = index;
         this.cost = cost;
     }
-    @Override
-    public int compare(Node o1, Node o2) {
-        return o1.cost-o2.cost;
+
+    public int compareTo(Node o1) {
+        return this.cost-o1.cost;
     }
 }
