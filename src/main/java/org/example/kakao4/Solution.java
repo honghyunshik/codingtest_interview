@@ -11,6 +11,7 @@ import java.util.StringTokenizer;
 public class Solution {
 
     public static void main(String[] args) throws IOException {
+/*
 
         Solution sol = new Solution();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -47,9 +48,16 @@ public class Solution {
         int[] answer = sol.solution(n,paths,gates,summits);
         System.out.println(Arrays.toString(answer));
 
-
+*/
+        int[][] paths = {{1, 2, 3}, {2, 3, 5}, {2, 4, 2}, {2, 5, 4}, {3, 4, 4}, {4, 5, 3}, {4, 6, 1}, {5, 6, 1}};
+        int[] gates = {1,3};
+        int[] summits = {5};
+        Solution sol = new Solution();
+        int[] ans = sol.solution(6,paths,gates,summits);
+        System.out.println(Arrays.toString(ans));
 
     }
+
     public int[] solution(int n, int[][] paths, int[] gates, int[] summits) {
 
         //n은 지점 수
@@ -59,6 +67,7 @@ public class Solution {
 
         int intensity = Integer.MAX_VALUE;      //휴식 없이 이동한 시간
         int[] answer = new int[2];
+        Arrays.sort(summits);
 
         for(int gate:gates){
 
@@ -68,10 +77,12 @@ public class Solution {
             Arrays.fill(intensities,Integer.MAX_VALUE);
             intensities[gate] = 0;
             boolean[] visited = new boolean[n+1];
+
             for(int t:gates){
                 if(t==gate) continue;
                 visited[t] = true;
             }
+
             while(!pq.isEmpty()){
 
                 int now = pq.poll().index;
@@ -80,18 +91,19 @@ public class Solution {
 
                 //summit에 도착했을 때 최솟값을 저장
                 for(int summit:summits){
+                    System.out.println(now + "," + summit);
                     if(now==summit){
-                        System.out.println(Arrays.toString(intensities) + now);
                         int temp = Integer.MIN_VALUE;
+                        System.out.println(Arrays.toString(intensities));
                         for(int i=1;i<intensities.length;i++){
                             if(intensities[i]==Integer.MAX_VALUE) continue;
                             if(visited[i]) continue;
                             temp = Math.max(intensities[i],temp);
-                        }
-                        if(temp<intensity){
-                            intensity = temp;
-                            answer[0] = now;
-                            answer[1] = intensity;
+                            if(temp<intensity){
+                                intensity = temp;
+                                answer[0] = now;
+                                answer[1] = intensity;
+                            }
                         }
                     }
                 }
