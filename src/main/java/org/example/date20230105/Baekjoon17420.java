@@ -40,7 +40,9 @@ public class Baekjoon17420 {
         int prevWillDay = 0;        //이전의 willDay값 저장
         //1. 이전 선물의 남아있는 일수보다 많이 남아있어야 함
 
-        for(Gift gift:giftList){
+        int n = giftList.length;
+        for(int i=0;i<n;i++){
+            Gift gift = giftList[i];
 
             int lastDay = gift.lastDay;
             int willDay = gift.willDay;
@@ -58,8 +60,6 @@ public class Baekjoon17420 {
             sameMaxDay = Math.max(lastDay,sameMaxDay);
             prevWillDay = willDay;
         }
-
-
 
 
         return count;
