@@ -1,5 +1,6 @@
 package org.example.baekjoon16235;
 
+import javax.swing.text.Style;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -88,6 +89,7 @@ class Solution{
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
                 String key = i + "," + j;
+                int temp = map.get(key).size();
                 ans += map.get(key).size();
             }
         }
@@ -135,9 +137,10 @@ class Solution{
                     //5의 배수이면 주변에 나무를 심음
                     if(now%5==0){
                         for(int k=0;k<D.length;k++){
-                            int nextI = i + D[i][0];
-                            int nextJ = j + D[i][1];
+                            int nextI = i + D[k][0];
+                            int nextJ = j + D[k][1];
                             if(nextI>n-1||nextI<0||nextJ>n-1||nextJ<0) continue;
+                            //System.out.println(i + "," + j + "   " + nextI + "<" + nextJ);
                             map.get(nextI+","+nextJ).add(1);
                         }
                     }
@@ -156,11 +159,6 @@ class Solution{
             }
         }
 
-        for(int i=0;i<BOARD.length;i++){
-            System.out.println(Arrays.toString(BOARD[i]));
-        }
-        System.out.println();
-        System.out.println();
 
     }
 
