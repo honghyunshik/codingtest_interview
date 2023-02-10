@@ -23,7 +23,7 @@ public class Delivery {
             int back_cap = cap;
             answer += (p+1)*2;
 
-            //for문을 최소화
+            //for문을 최소화한다
 
             for(int k=p;k>=0;k--){
 
