@@ -12,6 +12,7 @@ public class Delivery {
     public long solution(int cap, int n, int[] deliveries, int[] pickups) {
         long answer = 0;
         int p = n-1;
+        boolean check = true;
         while(p>=0){
 
             //배달할 것도, 수거할 것도 없다면 p를 감소
