@@ -1,6 +1,6 @@
 package org.example.kakao5;
 
-public class Solution {
+class Solution {
 
     static int user_count = 0;
     static int user_sale = 0;
@@ -20,6 +20,7 @@ public class Solution {
         if(index==emoticons.length){
             int temp_user_count = 0;
             int temp_user_sale = 0;
+
             for(int i=0;i<user_buy.length;i++){
                 if(user_buy[i]>=users[i][1]){
                     temp_user_count++;
@@ -33,6 +34,7 @@ public class Solution {
             }else if(temp_user_count==user_count){
                 user_sale = Math.max(temp_user_sale,user_sale);
             }
+            return;
         }
 
         for(int per=10;per<=40;per+=10){
@@ -40,8 +42,10 @@ public class Solution {
                 int[] user = users[i];
                 //user[0] => 퍼센트, user[1] => 최소금액
                 //이모티콘 할인율을 넘었으므로 구매
-                if(user[0]<=i){
-                    user_buy[i] += emoticons[index] * i / 100;
+
+                //if(i==0) System.out.println(user[0] + " " + i);
+                if(user[0]<=per){
+                    user_buy[i] += emoticons[index] * (100-per) / 100;
                 }
             }
 
@@ -51,8 +55,8 @@ public class Solution {
                 int[] user = users[i];
                 //user[0] => 퍼센트, user[1] => 최소금액
                 //이모티콘 할인율을 넘었으므로 구매
-                if(user[0]<=i){
-                    user_buy[i] -= emoticons[index] * i / 100;
+                if(user[0]<=per){
+                    user_buy[i] -= emoticons[index] * (100-per) / 100;
                 }
             }
 
