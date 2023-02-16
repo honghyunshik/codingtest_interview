@@ -18,7 +18,7 @@ public class Solution {
             if(end>2400) end -= 2400;
             boolean isIn = false;
             for(ArrayList<int[]> list:room){
-                boolean check = false;      //false면 안겹치는거 true면 겹치는거
+                boolean check = false;
                 for(int[] one:list){
                     int start_one = one[0];
                     int end_one = one[1] + 10;
