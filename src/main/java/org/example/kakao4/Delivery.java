@@ -1,52 +1,41 @@
 package org.example.kakao4;
 
 import java.util.*;
-public class Delivery {
 
-    public static void main(String[] args){
-        Delivery del = new Delivery();
-        int[] deliveries = {0,6};
-        int[] pickups = {0,0};
-        System.out.println(del.solution(2,2,deliveries,pickups));
-    }
+class Delivery {
     public long solution(int cap, int n, int[] deliveries, int[] pickups) {
         long answer = 0;
         int p = n-1;
-        boolean check = true;
-        while(p>=0){
-
-            //배달할 것도, 수거할 것도 없다면 p를 감소
-            while(p>=0&&deliveries[p]==0&&pickups[p]==0){
-                p--;
+        Stack<Integer> go = new Stack();
+        Stack<Integer> back = new Stack();
+        for(int i:deliveries){
+            go.push(i);
+        }
+        for(int i:pickups){
+            back.push(i);
+        }
+        while(!go.isEmpty()&&go.peek()==0){
+            go.pop();
+        }
+        while(!back.isEmpty()&&back.peek()==0){
+            back.pop();
+        }
+        answer += Math.max(go.size(),back.size())*2;
+        while(!go.isEmpty()||!back.isEmpty()){
+            int go_temp = cap;
+            int back_temp = cap;
+            while(!go.isEmpty()&&go_temp>=0){
+                int go_now = go.pop();
+                go_temp -= go_now;
+                if(go_temp<0) go.push(-go_temp);
             }
-
-            int go_cap = cap;
-            int back_cap = cap;
-            answer += (p+1)*2;
-
-            //for문을 최소화한다
-
-            for(int k=p;k>=0;k--){
-
-                if(go_cap<=0&&back_cap<=0) break;
-                if(go_cap>=deliveries[k]){
-                    go_cap -= deliveries[k];
-                    deliveries[k] = 0;
-                }else{
-                    deliveries[k] -= go_cap;
-                    go_cap = 0;
-                }
-                if(back_cap>=pickups[k]){
-
-                    back_cap -= pickups[k];
-                    pickups[k] = 0;
-                }else{
-                    pickups[k] -= back_cap;
-                    back_cap = 0;
-                }
-                System.out.println();
+            while(!back.isEmpty()&&back_temp>=0){
+                int back_now = back.pop();
+                back_temp -= back_now;
+                if(back_temp<0) back.push(-back_temp);
             }
-
+            answer += Math.max(go.size(),back.size())*2;
+            //System.out.println(go.size() + " " + back.size());
         }
         return answer;
     }
