@@ -3,47 +3,52 @@ package org.example.hotel;
 import java.util.*;
 public class Solution {
 
-    public static void main(String[] args){
-        Solution sol = new Solution();
-        String[][] book_time = {{"09:10","10:10"},{"10:20","5:20"}};
-        System.out.println(sol.solution(book_time));
+    public int solution(String[][] book_time) {
+        int answer = 0;
+        Time[] time = new Time[book_time.length];
+        for(int i=0;i<book_time.length;i++){
+            time[i] = new Time(book_time[i][0],book_time[i][1]);
+        }
+        Arrays.sort(time);
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        for(int i=0;i<time.length;i++){
+
+            int now_start = time[i].start;
+            int now_end = time[i].end;
+            while(!pq.isEmpty()&&pq.peek()<=now_start){
+                pq.poll();
+            }
+            pq.add(now_end);
+            answer = Math.max(answer,pq.size());
+        }
+        return answer;
+    }
+}
+
+class Time implements Comparable<Time>{
+
+    int start, end;
+
+    @Override
+    public int compareTo(Time o){
+        if(this.start==o.start){
+            return o.end-this.end;
+        }
+        return this.start-o.start;
     }
 
+    int getTime(String time, boolean isEnd){
 
-    public int solution(String[][] book_time) {
-        ArrayList<ArrayList<int[]>> room = new ArrayList<>();
-        for(String[] book:book_time){
-            int start = Integer.parseInt(book[0].replace(":",""));
-            int end = Integer.parseInt(book[1].replace(":","")) + 10;
-            if(end>2400) end -= 2400;
-            boolean isIn = false;
-            for(ArrayList<int[]> list:room){
-                boolean check = false;
-                for(int[] one:list){
-                    int start_one = one[0];
-                    int end_one = one[1] + 10;
-                    if(end_one>2400) end_one -= 2400;
+        int hour = Integer.parseInt(time.split(":")[0]);
+        int minute = Integer.parseInt(time.split(":")[1]);
+        if(isEnd) minute += 10;
+        return hour*60 + minute;
+    }
 
-                }
-                if(!check) {
-                    list.add(new int[]{start,end});
-                    isIn = true;
-                    break;
-                }
-            }
-            if(!isIn){
-                ArrayList<int[]> new_r = new ArrayList<>();
-                new_r.add(new int[]{start,end});
-                room.add(new_r);
-            }
-        }
-        for(ArrayList<int[]> list:room){
-            for(int[] i:list){
-                System.out.print(Arrays.toString(i) + "  ");
-            }
-            System.out.println();
-        }
-        int answer = room.size();
-        return answer;
+    Time(String startTime, String endTime){
+        start = getTime(startTime,false);
+        end = getTime(endTime,true);
     }
 }
