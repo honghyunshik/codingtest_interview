@@ -16,8 +16,8 @@ class Solution {
         int wanho_r = scores[0][1];
         int sum = wanho_l + wanho_r;
         PriorityQueue<Person> pq = new PriorityQueue<>();
-        for(int[] i:scores){
-            pq.add(new Person(i[0],i[1]));
+        for(int[] i:scores) {
+            pq.add(new Person(i[0], i[1]));
         }
         int left = -1, right = -1;
         while(left!=wanho_l||right!=wanho_r){
@@ -39,7 +39,10 @@ class Person implements Comparable<Person>{
     }
     @Override
     public int compareTo(Person o){
-        return -(this.left+this.right) + (o.left + o.right);
+        if(o.left==this.left){
+            return this.right-o.right;
+        }
+        return o.left - this.left;
     }
 }
 
