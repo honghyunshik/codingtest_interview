@@ -28,27 +28,32 @@ public class Solution {
         int prevWill = 0;
         long prevTotal = 0;
         for(Gift g:gift){
-            //몇번을 연장해야 하느냐?
-
-            long delayCnt = (g.will-g.left)/30;
-            if((g.will-g.left)%30>0) delayCnt++;
-            long delayTotal = delayCnt*30 + g.left;
-            if(delayTotal<=max){
-                delayCnt =  (max - g.left) / 30;
-                if ((max-g.left)%30 > 0) delayCnt++;
-                delayTotal = delayCnt * 30 + g.left;
-            }
 
 
             //값이 달라지면 이전 최댓값 초기화
             if(prevWill!=g.will){
                 max = prevTotal;
             }
+
+            //몇번을 연장해야 하느냐?
+            long delayCnt = (g.will-g.left)/30;
+            if((g.will-g.left)%30>0) delayCnt++;
+            delayCnt = Math.max(0,delayCnt);
+            long delayTotal = delayCnt*30 + g.left;
+            if(delayTotal<=max){
+                delayCnt =  (max - g.left) / 30;
+                if ((max-g.left)%30 > 0) delayCnt++;
+                delayCnt = Math.max(0,delayCnt);
+                delayTotal = delayCnt * 30 + g.left;
+            }
+
+
             if(prevTotal<delayTotal){
                 prevTotal = delayTotal;
             }
 
             prevWill = g.will;
+
 
             answer += delayCnt;
         }
