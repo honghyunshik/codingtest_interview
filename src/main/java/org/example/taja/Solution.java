@@ -28,13 +28,20 @@ class Solution {
                 continue;
             }
             arr = getButton(numbers.charAt(now.idx));
-            //오른손이 이미 l,r에 있을 때가 아니면
-            if(arr[0]!=now.rightL||arr[1]!=now.rightR){
-                queue.add(new Button(arr[0],arr[1],now.rightL,now.rightR,now.dis + getPoint(now.leftL,now.leftR,arr[0],arr[1]),now.idx+1));
+            if(arr[0]==now.leftL&&arr[1]==now.leftR){
+                queue.add(new Button(now.leftL,now.leftR,now.rightL,now.rightR,now.dis+1,now.idx+1));
             }
-            //왼손이 이미 l,r에 있을 때가 아니면
-            if(arr[0]!=now.leftL||arr[1]!=now.leftR){
-                queue.add(new Button(now.leftL,now.leftR,arr[0],arr[1],now.dis + getPoint(now.rightL,now.rightR,arr[0],arr[1]),now.idx+1));
+            else if(arr[0]==now.rightL&&arr[1]==now.rightR){
+                queue.add(new Button(now.leftL,now.leftR,now.rightL,now.rightR,now.dis+1,now.idx+1));
+            }else {
+                //오른손이 이미 l,r에 있을 때가 아니면
+                if (arr[0] != now.rightL || arr[1] != now.rightR) {
+                    queue.add(new Button(arr[0], arr[1], now.rightL, now.rightR, now.dis + getPoint(now.leftL, now.leftR, arr[0], arr[1]), now.idx + 1));
+                }
+                //왼손이 이미 l,r에 있을 때가 아니면
+                if (arr[0] != now.leftL || arr[1] != now.leftR) {
+                    queue.add(new Button(now.leftL, now.leftR, arr[0], arr[1], now.dis + getPoint(now.rightL, now.rightR, arr[0], arr[1]), now.idx + 1));
+                }
             }
         }
 
