@@ -5,7 +5,6 @@ class FindK {
 
     public static void main(String[] args){
         FindK findK = new FindK();
-        System.out.println(findK.solution(6,3));
     }
     public int solution(int n, int k) {
         int answer = 0;
@@ -31,6 +30,7 @@ class FindK {
     public boolean isSosu(String s){
 
         Long num = Long.parseLong(s);
+        //에레테노스의 채
         if(num<=1) return false;
         for(int i=2;i<=Math.sqrt(num);i++){
             if(num%i==0) return false;
