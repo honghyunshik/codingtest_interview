@@ -9,9 +9,15 @@ public class Test {
         change(a);
         System.out.println(a);
         */
-        Student<Integer,Integer> student = new Student<>(100000,15);
+        Student<Integer> student = new Student<>(100000,15);
         System.out.println(student.age);
         System.out.println(student.money);
+        student.<Integer>getMoney(150);
+        String a1 = "1234";
+        String b1 = "1234";
+        System.out.println(a1.hashCode());
+        System.out.println(b1.hashCode());
+        System.out.println(a1.hashCode()==b1.hashCode());
 
     }
 
@@ -21,12 +27,16 @@ public class Test {
     }
 }
 
-class Student<S,T>{
+class Student<T>{
 
-    S money;
+    T money;
     T age;
-    Student(S money, T age){
+    Student(T money, T age){
         this.money = money;
         this.age = age;
+    }
+
+    <V> V getMoney(V money){
+        return money;
     }
 }
