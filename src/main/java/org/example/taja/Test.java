@@ -1,19 +1,17 @@
 package org.example.taja;
 
-import java.util.ArrayList;
-
 public class Test {
 
     public static void main(String[] args){
 
         String a = "123";
-        //change(a);
-        ArrayList<Integer> ab = new ArrayList<>();
-        change(ab);
-        System.out.println(ab);
+        change(a);
+        System.out.println(a);
+
     }
 
-    public static void change(ArrayList<Integer> ab){
-        ab.add(1);
+    public static void change(String s){
+        s = s.concat("123");
+
     }
 }
