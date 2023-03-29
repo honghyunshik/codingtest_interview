@@ -10,12 +10,16 @@ public class Practice {
 
     public static void main(String[] args){
 
-        //ArrayList<Integer> list = new ArrayList<>(Arrays.asList(1,2,31,4,89));
-        //List<Integer> list2 = list.stream().map(num->num+100).filter(num->num>2).sorted((a, b)->b-a).collect(Collectors.toList());
-        //int a = (int) stream.count();
-        //System.out.println(a);
-        Hi hi = new Hi(20);
-        System.out.println(hi.a);
+        StringBuilder sb = new StringBuilder(5);
+        
+    }
+
+    void readCard(int cardNo) throws Exception{
+        System.out.println("hi");
+    }
+
+    void checkCard(int cardNo) throws RuntimeException{
+        System.out.println("hi2");
     }
 }
 
