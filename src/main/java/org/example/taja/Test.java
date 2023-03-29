@@ -1,5 +1,7 @@
 package org.example.taja;
 
+import java.util.ArrayList;
+
 public class Test {
 
     public static void main(String[] args){
@@ -8,7 +10,7 @@ public class Test {
         String a = "123";
         change(a);
         System.out.println(a);
-        */
+
         Student<Integer> student = new Student<>(100000,15);
         System.out.println(student.age);
         System.out.println(student.money);
@@ -18,6 +20,8 @@ public class Test {
         System.out.println(a1.hashCode());
         System.out.println(b1.hashCode());
         System.out.println(a1.hashCode()==b1.hashCode());
+        */
+
 
     }
 
