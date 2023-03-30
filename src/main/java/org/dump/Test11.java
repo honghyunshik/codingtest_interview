@@ -1,20 +1,31 @@
 package org.dump;
 
-public class Test11 {
+import java.io.IOException;
+
+public class Test11 extends X{
 
     public static void main(String[] args){
 
-        String opt = "true";
-        switch (opt){
-            case "true": System.out.println("true");
-                break;
-            case "false": System.out.println("false");
-
-            default: System.out.println("aaa");
-        }
+        System.out.println(new StringBuilder("hello"));
+        System.out.println(new Boolean(true));
     }
 
-    public static boolean avail(int x){
-        return x-- >0?true:false;
+    public static String getColor(){
+        return "green";
     }
+
+    Test11(){
+        super();
+    }
+
+}
+
+class X{
+    public void printFileContent() throws Exception{
+        throw new IOException();
+    }
+}
+
+abstract class Y{
+    int a;
 }
