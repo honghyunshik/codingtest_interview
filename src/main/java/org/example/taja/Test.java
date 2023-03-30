@@ -1,8 +1,10 @@
 package org.example.taja;
 
+import org.example.programmers2.FindK;
+
 import java.util.ArrayList;
 
-public class Test {
+public class Test extends FindK {
 
     public static void main(String[] args){
 
@@ -21,7 +23,6 @@ public class Test {
         System.out.println(b1.hashCode());
         System.out.println(a1.hashCode()==b1.hashCode());
         */
-
 
     }
 

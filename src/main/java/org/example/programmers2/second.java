@@ -11,6 +11,7 @@ import java.util.*;
 //"xababcdcdababcdcd" 17
 class second {
 
+
     public static void main(String[] args){
         String input = "a";
         second se = new second();

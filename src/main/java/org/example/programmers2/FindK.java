@@ -1,7 +1,7 @@
 package org.example.programmers2;
 
 import java.util.*;
-class FindK {
+public class FindK {
 
     public static void main(String[] args){
         FindK findK = new FindK();
