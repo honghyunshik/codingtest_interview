@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface Readable {
     public void a();
-    public void b();
+    default void b(){
+
+    };
 }
 
 class Book implements Readable{
