@@ -7,8 +7,10 @@ public class Main {
     public static void main(String[] args){
 
         int[] input = {1,46,24,0,1234,2};
-        BubbleSort bubbleSort = new BubbleSort();
-        bubbleSort.bubble_sort(input);
+        //BubbleSort bubbleSort = new BubbleSort();
+        //bubbleSort.bubble_sort(input);
+        SelectionSort selectionSort = new SelectionSort();
+        selectionSort.selection_sort(input);
         System.out.println(Arrays.toString(input));
     }
 
