@@ -19,8 +19,10 @@ public class Main {
         //quickSort.quickSort(input);
         //System.out.println(Arrays.toString(input));
         //Fibonacci fibonacci = new Fibonacci();
-        Factorial factorial = new Factorial();
-        int answer = factorial.forFactorial(4);
+        //Factorial factorial = new Factorial();
+        //int answer = factorial.forFactorial(4);
+        Uclid uclid = new Uclid();
+        int answer = uclid.getGCD(new int[]{8, 12,4,5});
         System.out.println(answer);
     }
 
