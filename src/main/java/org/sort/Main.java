@@ -13,9 +13,15 @@ public class Main {
         //selectionSort.selection_sort(input);
         //InsertionSort insertionSort = new InsertionSort();
         //insertionSort.insertionSort(input);
-        HeapSort heapSort = new HeapSort();
-        heapSort.heapSort(input);
-        System.out.println(Arrays.toString(input));
+        //HeapSort heapSort = new HeapSort();
+        //heapSort.heapSort(input);
+        //QuickSort quickSort = new QuickSort();
+        //quickSort.quickSort(input);
+        //System.out.println(Arrays.toString(input));
+        //Fibonacci fibonacci = new Fibonacci();
+        Factorial factorial = new Factorial();
+        int answer = factorial.forFactorial(4);
+        System.out.println(answer);
     }
 
 }
