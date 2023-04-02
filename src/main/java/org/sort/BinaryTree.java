@@ -32,7 +32,7 @@ public class BinaryTree {
         if(root==null) {
             return new Node(data);
         }
-        if(data<=root.data) root.left = insertNode(root.left,data);
+        if(data<root.data) root.left = insertNode(root.left,data);
         else if(data>root.data) root.right = insertNode(root.right,data);
         return root;
     }
