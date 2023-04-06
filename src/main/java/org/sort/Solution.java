@@ -1,46 +1,75 @@
 package org.sort;
 
+import java.util.*;
 class Solution {
 
     public static void main(String[] args){
-        int[] sequence = {2, 3, -6, 1, 3, -1, 2, 4};
         Solution sol = new Solution();
-        System.out.println(sol.solution(sequence));
+        long[] numbers = {7,8};
+        int[] answer = sol.solution(numbers);
+        System.out.println(Arrays.toString(answer));
     }
-    public long solution(int[] sequence) {
-
-        int size = sequence.length;
-        int l = 0, r = 0;       //l은 +로 시작, r은 -로 시작
-        long plusStart = 0;
-        long minusStart = 0;
-        long answer = 0;
-        while(l<size&&r<size){
-            int tempL = l;
-            int tempR = r;
-            while(l<size&&plusStart>=0){
-                //짝수면 +
-                if((l-tempL)%2==0) plusStart += sequence[l++];
-                //홀수면 -
-                else plusStart -= sequence[l++];
-                if(answer<plusStart) {
-                    System.out.println("plus : " + tempL + " " + l);
-                    answer = plusStart;
-                }
+    static boolean check;
+    public int[] solution(long[] numbers) {
+        int[] answer = new int[numbers.length];
+        int idx = 0;
+        for(long number:numbers){
+            if(number==1){
+                answer[idx++] = 1;
+                continue;
             }
-            while(r<size&&minusStart>=0){
-                //짝수면 -
-                if((r-tempR)%2==0) minusStart -= sequence[r++];
-                    //홀수면 +
-                else minusStart += sequence[r++];
-                if(answer<minusStart){
-                    System.out.println("minus : " + tempR + " " + r);
-                    answer = minusStart;
-                }
+            check = true;
+            String binary = toBinary(number);
+            char[] list = new char[binary.length()+1];
+            for(int i=1;i<list.length;i++){
+                list[i] = binary.charAt(i-1);
+                System.out.print(i + " : " + list[i] + " ");
             }
-            minusStart = 0;
-            plusStart = 0;
-
+            int rootIdx = list.length/2;
+            dfs(rootIdx,rootIdx,list);
+            if(check) answer[idx++] = 1;
+            else answer[idx++] = 0;
+            System.out.println("\n\n-----\n\n");
         }
         return answer;
+    }
+
+    private void dfs(int parentIdx, int temp, char[] list){
+
+        temp/=2;
+        if(temp==0||!check) return;
+        int leftChildIdx = parentIdx-temp;
+        int rightChildIdx = parentIdx+temp;
+        System.out.println("\n" + parentIdx + " " + leftChildIdx + " " + rightChildIdx + " " + temp);
+        if(list[parentIdx]==48&&(list[leftChildIdx]==49||list[rightChildIdx]==49)){
+            check = false;
+            return;
+        }
+        dfs(leftChildIdx,temp,list);
+        dfs(rightChildIdx,temp,list);
+    }
+
+
+    private String toBinary(long num){
+
+        StringBuilder sb = new StringBuilder(Long.toBinaryString(num));
+        int j = 1;
+        while(Math.pow(2,j)<=num){
+            j = j*2+1;
+        }
+        int cnt = j-sb.length();
+        while(cnt>0){
+            sb.insert(0,0);
+            cnt--;
+        }
+        System.out.println(sb + " " + j);
+        return sb.toString();
+    }
+}
+class Node{
+    int data;
+    Node left,right;
+    Node(int data){
+        this.data = data;
     }
 }
