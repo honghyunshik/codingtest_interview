@@ -28,7 +28,6 @@ class Solution {
         int idx = 0;
         for(int i=0;i<list.length-1;i++){
             Node now = list[i];
-            System.out.println(now.name + " " + now.playTime);
             Node next = list[i+1];
             int nowStart = now.start;
             int nowPlayTime = now.playTime;
