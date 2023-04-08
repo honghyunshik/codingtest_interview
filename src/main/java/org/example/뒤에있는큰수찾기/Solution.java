@@ -4,7 +4,7 @@ import java.util.*;
 class Solution {
 
     public static void main(String[] args){
-        int[] numbers = {2,2,2,2,3};
+        int[] numbers = {2,2,2,2,3,5,87};
         Solution sol = new Solution();
         int[] ans = sol.solution(numbers);
         System.out.println(Arrays.toString(ans));
