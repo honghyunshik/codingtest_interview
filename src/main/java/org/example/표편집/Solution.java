@@ -13,51 +13,60 @@ class Solution {
     public String solution(int n, int k, String[] cmd) {
 
         boolean[] deleted = new boolean[n];
-        Stack<Integer> stack = new Stack<>();
-        LinkedList<Integer> list = new LinkedList<>();
+        Stack<int[]> stack = new Stack<>();
 
+        //0은 prev Index, 1은 next Index
+        int[][] array = new int[n][3];
+        StringBuilder sb = new StringBuilder();
         for(int i=0;i<n;i++){
-            list.add(i);
+            array[i] = new int[]{i-1,i+1};
+            sb.append("O");
         }
+
 
         for(int i=0;i<cmd.length;i++){
 
             String now = cmd[i];
-
-            System.out.println("k : " + k + " cmd : " + now + " size : " + list.size());
             if(now.equals("C")){
 
-                int delete = list.get(k);
-                deleted[delete] = true;
-                stack.add(delete);
-                list.remove(k);
-                if(k==list.size()-1) k--;
+                int prev = array[k][0];
+                int next = array[k][1];
+                //prev의 next는 next를 가리킴
+                if(prev!=-1) array[prev][1] = next;
+                //next의 prev는 prev를 가리킴
+                if(next!=n) array[next][0] = prev;
+                stack.add(new int[]{prev,k,next});
+                sb.setCharAt(k,'X');
+                if(next!=n) k = next;
+                else k = prev;
 
             }else if(now.equals("Z")){
 
-                int last = stack.pop();
-                deleted[last] = false;
-                int idx = list.size()-1;
-                for(int j=0;j<list.size()-1;j++){
-                    if(list.get(j+1)>last){
-                        idx = j;
-                        break;
-                    }
-                }
-                list.add(idx,last);
+                int[] temp  = stack.pop();
+                int prev = temp[0];
+                int next = temp[2];
+                array[prev][1] = temp[1];
+                array[next][0] = temp[1];
+                sb.setCharAt(temp[1],'O');
 
             }else{
                 String command = now.split(" ")[0];
                 int dis = Integer.parseInt(now.split(" ")[1]);
-                if(command.equals("D")) k += dis;
-                else k-=dis;
+                if(command.equals("D")) {
+                    while(dis>0){
+                        dis--;
+                        k = array[k][1];
+                    }
+                }
+                else{
+                    while(dis>0){
+                        dis--;
+                        k = array[k][0];
+                    }
+                }
             }
         }
-        StringBuilder sb = new StringBuilder();
-        for(int i=0;i<n;i++){
-            if(deleted[i]) sb.append("X");
-            else sb.append("O");
-        }
+
         return sb.toString();
     }
 }
