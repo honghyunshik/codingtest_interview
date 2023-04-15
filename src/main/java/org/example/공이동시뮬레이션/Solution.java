@@ -9,8 +9,8 @@ class Solution {
 
         long answer = 0;
         int len = queries.length;
-        int x2 = x, x1 = x;
-        int y2 = y, y1 = y;
+        long x2 = x, x1 = x;
+        long y2 = y, y1 = y;
 
         for(int i=len-1;i>=0;i--){
 
