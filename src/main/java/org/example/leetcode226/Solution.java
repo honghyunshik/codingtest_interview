@@ -26,7 +26,7 @@ class Solution {
         TreeNode root = new TreeNode(2,new TreeNode(3,new TreeNode(1,null,null),null),null);
         TreeNode node = sol.invertTree(root);
 
-
+        TreeNode node1 = new TreeNode(1,null,null);
     }
 
     public TreeNode invertTree(TreeNode root) {
