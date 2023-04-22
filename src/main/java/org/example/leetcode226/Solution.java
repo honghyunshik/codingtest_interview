@@ -34,9 +34,7 @@ class Solution {
         //tree -> list
 
         ArrayList<Integer> list = treeToList(root);
-        System.out.println(list);
         Integer[] arr = changeNode(list);
-        System.out.println(Arrays.toString(arr));
 
         TreeNode node = arrToNode(null, arr);
         return node;
