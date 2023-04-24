@@ -4,7 +4,7 @@ class Solution {
 
     public static void main(String[] args){
         Solution sol = new Solution();
-        System.out.println(sol.solution(6,7));
+        System.out.println(sol.solution(3,21));
     }
     public long solution(int w, int h) {
         long answer = w*h;
@@ -15,6 +15,7 @@ class Solution {
             int left = 0, right = 0;
             double one = (double)w/h*(i-1);
             double two = (double)w/h*i;
+            System.out.println(one + " "  + two);
             if(one%1!=0) left = (int)Math.round(one+0.5);
             else {
                 left = (int)one;
