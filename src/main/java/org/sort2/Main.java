@@ -12,8 +12,10 @@ public class Main {
         //bubbleSort.bubble_sort(arr);
         //SelectionSort selectionSort = new SelectionSort();
         //selectionSort.selection_sort(arr);
-        InsertionSort insertionSort = new InsertionSort();
-        insertionSort.insert_sort(arr);
+        //InsertionSort insertionSort = new InsertionSort();
+        //insertionSort.insert_sort(arr);
+        HeapSort heapSort = new HeapSort();
+        heapSort.heap_sort(arr);
         System.out.println(Arrays.toString(arr));
     }
 }
