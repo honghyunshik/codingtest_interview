@@ -1,6 +1,6 @@
 package org.sort;
 
-import org.sort2.MergeSort;
+import org.sort2.sort.MergeSort;
 
 import java.util.Arrays;
 

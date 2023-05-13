@@ -1,4 +1,4 @@
-package org.sort2;
+package org.sort2.sort;
 
 public class BubbleSort {
 
