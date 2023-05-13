@@ -14,8 +14,10 @@ public class Main {
         //selectionSort.selection_sort(arr);
         //InsertionSort insertionSort = new InsertionSort();
         //insertionSort.insert_sort(arr);
-        HeapSort heapSort = new HeapSort();
-        heapSort.heap_sort(arr);
+        //HeapSort heapSort = new HeapSort();
+        //heapSort.heap_sort(arr);
+        MergeSort mergeSort = new MergeSort();
+        mergeSort.merge_sort(arr);
         System.out.println(Arrays.toString(arr));
     }
 }
