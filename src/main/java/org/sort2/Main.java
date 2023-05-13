@@ -10,8 +10,10 @@ public class Main {
 
         //BubbleSort bubbleSort = new BubbleSort();
         //bubbleSort.bubble_sort(arr);
-        SelectionSort selectionSort = new SelectionSort();
-        selectionSort.selection_sort(arr);
+        //SelectionSort selectionSort = new SelectionSort();
+        //selectionSort.selection_sort(arr);
+        InsertionSort insertionSort = new InsertionSort();
+        insertionSort.insert_sort(arr);
         System.out.println(Arrays.toString(arr));
     }
 }
