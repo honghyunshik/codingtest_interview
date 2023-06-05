@@ -3,6 +3,7 @@ package org.sort;
 public class QuickSort {
 
     public void quickSort(int[] arr){
+
         l_pivor_sort(arr,0,arr.length-1);
     }
 
